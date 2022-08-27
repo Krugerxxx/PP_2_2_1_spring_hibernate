@@ -22,8 +22,8 @@ public class User {
     @Column(name = "email")
     private String email;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    private Car car = null;
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Car car;
 
     public User() {
     }
@@ -67,6 +67,13 @@ public class User {
     }
 
     public void setCar(Car car) {
+        if (car == null) {
+            if (this.car != null) {
+                this.car.setUser(null);
+            }
+        } else {
+            car.setUser(this);
+        }
         this.car = car;
     }
 

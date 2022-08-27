@@ -18,12 +18,23 @@ public class Car {
     @Column
     private int series;
 
+    @OneToOne(fetch = FetchType.LAZY)
+    private User user;
+
     public Car() {
     }
 
     public Car(String model, int series) {
         this.model = model;
         this.series = series;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     public void setModel(String model) {
@@ -40,6 +51,14 @@ public class Car {
 
     public int getSeries() {
         return series;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     @Override
